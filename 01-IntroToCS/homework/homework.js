@@ -16,12 +16,12 @@ return resultado
 
 function DecimalABinario(num) {
   // tu codigo aca
-  let resultado = [];
+  let resultado = []
   while (num > 0){
-    resultado.push(num%2);
-    num =Math.floor(num/2);
+    resultado.push(num%2)
+    num =Math.floor(num/2)
   }
-return resultado.reverse().join('') ;
+return resultado.reverse().join('') 
 }
 
 
