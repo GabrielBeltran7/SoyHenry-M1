@@ -26,7 +26,7 @@ var c = function(a, b, c) {
 }
 c(8,9,10);
 console.log(b);//10
-console.log(x);//11
+console.log(x);//1
 ```
 
 ```javascript
@@ -37,6 +37,7 @@ function foo() { console.log('Hola!'); }
 var bar = 1;
 baz = 2;
 ```
+
 
 ```javascript
 var instructor = "Tony";
@@ -75,8 +76,8 @@ console.log(pm);//Franco
 ¿Cuál crees que será el resultado de la ejecución de estas operaciones?:
 
 ```javascript
-6 / "3"
-"2" * "3"
+6 / "3"  // 63
+"2" * "3" //6
 4 + 5 + "px"  //"9px"
 "$" + 4 + 5 // "$45"
 "4" - 2  // 2
