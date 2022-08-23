@@ -1,7 +1,8 @@
 "use strict";
 
 /*
-Implementar la clase LinkedList, definiendo los siguientes métodos:
+Implementar la clase LinkedList, definiendo los siguientes 
+métodos:
   - add: agrega un nuevo nodo al final de la lista;
   - remove: elimina el último nodo de la lista y retorna su valor (tener en cuenta el caso particular de una lista de un solo nodo y de una lista vacía);
   - search: recibe un parámetro y lo busca dentro de la lista, con una particularidad: el parámetro puede ser un valor o un callback. En el primer caso, buscamos un nodo cuyo valor coincida con lo buscado; en el segundo, buscamos un nodo cuyo valor, al ser pasado como parámetro del callback, retorne true. 
@@ -11,9 +12,64 @@ Implementar la clase LinkedList, definiendo los siguientes métodos:
   En caso de que la búsqueda no arroje resultados, search debe retornar null.
 */
 
-function LinkedList() {}
+class LinkedList {
+  constructor(){
+    this.head = null
+  }
 
-function Node(value) {}
+  add(data){
+    let nodo = new  Node(data)
+    let current  = this.head;
+    if(!current){
+      this.head=nodo;
+      return nodo
+    }
+    while(current.next){
+      current = current.next;
+    }
+    current.next= nodo
+    return nodo
+  }
+
+  remove(){
+    if(!this.head) return null;
+    if(this.head && !this.head.next){
+      let rNode = this.head;
+ this.head = null;
+ return rNode.value
+    }
+    let current = this.head;
+    while (current.next.next){
+      current = current.next
+    }
+    let rNode = current.next;
+    current.next= null;
+    return rNode.value
+  }
+
+  search(value){
+if(!this.head) return null;
+let current = this.head;
+while (current){
+  if(current.value ===  value) return current.value
+  else if(typeof value ==="function"){
+if(value(current.value)) return current.value
+  }
+  current = current.next
+}
+return null
+  }  
+
+
+}
+
+class Node{
+  constructor(data ){
+    this.value = data;
+    this.next = null
+  }
+}
+
 
 /*
 Implementar la clase HashTable.
@@ -30,8 +86,51 @@ La clase debe tener los siguientes métodos:
 Ejemplo: supongamos que quiero guardar {instructora: 'Ani'} en la tabla. Primero puedo chequear, con hasKey, si ya hay algo en la tabla con el nombre 'instructora'; luego, invocando set('instructora', 'Ani'), se almacenará el par clave-valor en un bucket específico (determinado al hashear la clave)
 */
 
-function HashTable() {}
+function HashTable() {
 
+  
+  this.numBuckets = 35;
+  
+  this.buckets = [];
+  
+  }
+  
+  HashTable.prototype.hash= function (key){ 
+  let sum = 0;
+  
+  for (let i = 0; i <key.length; i++) {
+  
+  sum += key.charCodeAt(i);
+  
+  }
+  
+  return sum % this.numBuckets; 
+  
+  };
+  
+  HashTable.prototype.set = function(key, value){ 
+    
+  if (typeof key !== 'string') throw new TypeError('Keys must be strings');
+  
+  let posArr = this.hash(key); 
+  if (this.buckets [posArr] === undefined) {
+  
+  this.buckets [posArr] = {};
+  }
+  this.buckets[posArr][key] = value
+}
+
+HashTable.prototype.get = function (key){
+    let posArr = this.hash(key); //3
+    return this.buckets [posArr] [key];
+    }
+
+HashTable.prototype.hasKey =function(key){
+  let posArr = this.hash(key)
+  return this.buckets[posArr].hasOwnProperty;
+
+}
+  
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
