@@ -130,7 +130,7 @@ HashTable.prototype.hasKey =function(key){
   return this.buckets[posArr].hasOwnProperty;
 
 }
-  
+  //
 // No modifiquen nada debajo de esta linea
 // --------------------------------
 
